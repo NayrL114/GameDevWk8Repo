@@ -9,6 +9,9 @@ public class CharacterMovement : MonoBehaviour
     private float movementSqrMagnitude;
     public float walkSpeed = 1.75f;
     public Animator playerAnimator;
+    public AudioSource footstepSource;
+    public AudioClip[] footstepClips;
+    public AudioSource bgmSource;
 
     // Update is called once per frame
     void Update()
@@ -49,7 +52,24 @@ public class CharacterMovement : MonoBehaviour
 
     void FootstepAudio()
     {
-
+        if (movementSqrMagnitude > 0.25f && !footstepSource.isPlaying)
+        {
+            if (footstepSource.clip == footstepClips[1]){
+                footstepSource.clip = footstepClips[0];
+            }
+            else
+            {
+                footstepSource.clip = footstepClips[1];
+            }
+            footstepSource.volume = movementSqrMagnitude;
+            bgmSource.volume = 0.5f;
+            footstepSource.Play();
+        }
+        else if (movementSqrMagnitude <= 0.3f && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+            bgmSource.volume = 1f;
+        }
     }
 
 }
