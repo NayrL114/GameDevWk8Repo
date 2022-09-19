@@ -20,7 +20,10 @@ public class CharacterMovement : MonoBehaviour
 
     void GetMovementInput()
     {
-
+        movement.x = Input.GetAxis("Horizontal");
+        movement.z = Input.GetAxis("Vertical");
+        movementSqrMagnitude = movement.sqrMagnitude;
+        Debug.Log(movement);
     }
 
     void CharacterPosition()
