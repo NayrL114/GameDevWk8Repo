@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 movement;
     private float movementSqrMagnitude;
     public float walkSpeed = 1.75f;
+    public Animator playerAnimator;
 
     // Update is called once per frame
     void Update()
@@ -25,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
         movement.z = Input.GetAxis("Vertical");
         movement = Vector3.ClampMagnitude(movement, 1.0f);
         movementSqrMagnitude = movement.sqrMagnitude;
-        Debug.Log(movement);
+        //Debug.Log(movement);
     }
 
     void CharacterPosition()
@@ -43,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
     void WalkAnimation()
     {
-
+        playerAnimator.SetFloat("MovingSpeed", movementSqrMagnitude);
     }
 
     void FootstepAudio()
